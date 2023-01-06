@@ -113,9 +113,10 @@
 @media (max-width: 480px) {
   .colThree {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    gap: 2rem;
+    gap: 0rem;
   }
 }
