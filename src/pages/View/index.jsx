@@ -155,6 +155,35 @@ const View = () => {
                             </div>
                           </div>
                         </div>
+
+                        <div className='dadosConsulta'>
+                          <h2>Histórico Patológico</h2>
+
+                          <div>
+                            <h3>Alergia</h3>
+                            <p>
+                              {data[id].alergia === "Sim"
+                                ? data[id].tipoAlergia
+                                : "Não"}
+                            </p>
+                          </div>
+
+                          <div>
+                            <h3>Tratamento médico</h3>
+                            <p>
+                              {data[id].medicacao === "Sim"
+                                ? data[id].tipoMedicamento
+                                : "Não"}
+                            </p>
+                          </div>
+
+                          <div>
+                            <h3>Comorbidades</h3>
+                            {data[id].comorbidades?.map((doenca) => {
+                              return <p>{doenca}</p>;
+                            })}
+                          </div>
+                        </div>
                       </div>
                     </PDFExport>
 

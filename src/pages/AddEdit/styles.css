@@ -15,6 +15,11 @@ label{
   color: #fff;
 }
 
+.label-dialog{
+  color: #000;
+  font-size: 1.2rem;
+}
+
 legend {
   color: #000;
 }

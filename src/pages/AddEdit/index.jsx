@@ -14,6 +14,38 @@ import InputMask from "react-input-mask";
 
 import { UserContext } from "../../context/UserContext";
 
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import ListItemText from "@mui/material/ListItemText";
+import Select from "@mui/material/Select";
+import Checkbox from "@mui/material/Checkbox";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  "Cardíaca",
+  "Vasculares",
+  "Reumática",
+  "Renal",
+  "DIU",
+  "Glandulares",
+  "Bronquite",
+  "Resfriados",
+  "Contraceptivos",
+  "DSTS",
+];
+
 const AddEdit = () => {
   const { infosUser } = useContext(UserContext);
 
@@ -39,6 +71,12 @@ const AddEdit = () => {
     situacaoCliente,
     imagemAntes,
     imagemDepois,
+
+    //historico patologico
+    alergia,
+    tipoAlergia,
+    medicacao,
+    tipoMedicamento,
   } = state;
 
   const history = useHistory();
@@ -163,6 +201,25 @@ const AddEdit = () => {
     }
   }, [open]);
 
+  const [personName, setPersonName] = React.useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value
+    );
+    setState({
+      ...state,
+      ["comorbidades"]: event.target.value,
+    });
+  };
+
+  console.log(personName);
+  console.log(state);
+
   return (
     <div className='add-edit'>
       <form className='add-edit__form' onSubmit={handleSubmit}>
@@ -258,11 +315,11 @@ const AddEdit = () => {
             )}
             <br />
 
-            {/* <Button onClick={handleClickOpen("paper")} variant='contained'>
-              Preencher dados da ação
-            </Button> */}
+            <Button onClick={handleClickOpen("paper")} variant='contained'>
+              Dados de Histórico Patológico
+            </Button>
 
-            {/* <Dialog
+            <Dialog
               open={open}
               onClose={handleClose}
               scroll={scroll}
@@ -270,50 +327,87 @@ const AddEdit = () => {
               aria-describedby='scroll-dialog-description'
             >
               <DialogTitle id='scroll-dialog-title'>
-                Preencher dados da ação
+                Dados de Histórico Patológico
               </DialogTitle>
               <DialogContent dividers={scroll === "paper"}>
-                <label htmlFor='statusExecucao'> Status de Execução</label>
+                <label htmlFor='alergia' className='label-dialog'>
+                  Possui Alergia
+                </label>
                 <select
-                  name='statusExecucao'
-                  id='statusExecucao'
-                  value={statusExecucao}
+                  name='alergia'
+                  id='alergia'
+                  value={alergia}
                   onChange={handleInputChange}
                 >
-                  <option value=''>Nenhum</option>
-                  <option value='Retirada'>Retirada</option>
-                  <option value='Acompanhamento'>Acompanhamento</option>
-                  <option value='Pendente'>Pendente</option>
+                  <option value='' style={{ display: "none" }}></option>
+                  <option value='Sim'>Sim</option>
+                  <option value='Não'>Não</option>
                 </select>
 
-                <label htmlFor='seccionalInspecao'>Seccional de Inspeção</label>
+                {alergia === "Sim" ? (
+                  <input
+                    type='text'
+                    id='tipoAlergia'
+                    name='tipoAlergia'
+                    placeholder='Qual Alergia'
+                    required
+                    value={tipoAlergia}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  ""
+                )}
+
+                <label htmlFor='medicacao' className='label-dialog'>
+                  Tratamento médico/medicação
+                </label>
                 <select
-                  name='seccionalInspecao'
-                  id='seccionalInspecao'
-                  value={seccionalInspecao}
+                  name='medicacao'
+                  id='medicacao'
+                  value={medicacao}
                   onChange={handleInputChange}
                 >
-                  <option value=''>Nenhum</option>
-                  <option value='São Luís'>São Luís</option>
-                  <option value='Barreirinhas'>Barreirinhas</option>
-                  <option value='Rosário'>Rosário</option>
+                  <option value='' style={{ display: "none" }}></option>
+                  <option value='Sim'>Sim</option>
+                  <option value='Não'>Não</option>
                 </select>
 
-                <label htmlFor='equipamentos'>Equipamentos</label>
-                <textarea
-                  name='equipamentos'
-                  id='equipamentos'
-                  value={equipamentos}
-                  onChange={handleInputChange}
-                ></textarea>
+                {medicacao === "Sim" ? (
+                  <input
+                    type='text'
+                    id='tipoMedicamento'
+                    name='tipoMedicamento'
+                    placeholder='Qual Medicamento'
+                    required
+                    value={tipoMedicamento}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  ""
+                )}
 
-                <label htmlFor='materiais'>Materiais</label>
-                <textarea
-                  name='materiais'
-                  id='materiais'
-                  value={materiais}
-                  onChange={handleInputChange}
-                ></textarea>
+                <FormControl sx={{ mt: 2, width: "100%" }}>
+                  <InputLabel id='demo-multiple-checkbox-label'>
+                    Comorbidades
+                  </InputLabel>
+                  <Select
+                    labelId='demo-multiple-checkbox-label'
+                    id='demo-multiple-checkbox'
+                    multiple
+                    value={personName}
+                    onChange={handleChange}
+                    input={<OutlinedInput label='Comorbidades' />}
+                    renderValue={(selected) => selected.join(", ")}
+                    MenuProps={MenuProps}
+                  >
+                    {names.map((name) => (
+                      <MenuItem key={name} value={name}>
+                        <Checkbox checked={personName.indexOf(name) > -1} />
+                        <ListItemText primary={name} />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleClose}>Cancelar</Button>
@@ -321,7 +415,7 @@ const AddEdit = () => {
                   Salvar
                 </Button>
               </DialogActions>
-            </Dialog> */}
+            </Dialog>
           </div>
 
           <div className='situacaoObraForm'>
