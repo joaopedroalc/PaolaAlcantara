@@ -1,0 +1,144 @@
+.styled-table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.styled-table thead tr {
+  background-color: #2196f3;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  text-align: left;
+  padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  background-color: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 5px 8px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  margin: 0px 5px;
+  cursor: pointer;
+}
+
+.btn-edit {
+  background-color: #008cba;
+  transition: 1s;
+}
+
+.btn-edit:hover {
+  opacity: 0.5;
+}
+
+.btn-delete {
+  transition: 1s;
+  background-color: #f44336;
+}
+
+.btn-delete:hover {
+  opacity: 0.5;
+}
+
+.btn-view {
+  background-color: #b6b6b6;
+  color: black;
+  transition: 1s;
+}
+
+.btn-view:hover {
+  opacity: 0.5;
+}
+
+.home {
+  margin-top: 2rem;
+}
+
+label {
+  display: flex;
+  text-align: left;
+  color: #000;
+}
+.sectionRegisterContainer {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.sectionRegister {
+  text-align: left;
+}
+
+.sectionRegister h2 {
+  font-weight: 300;
+  font-size: 2rem;
+  margin: 0;
+  color: #fff;
+}
+.registrarColaborador {
+  background-color: green;
+  color: #fff;
+  border: none;
+  width: 25rem;
+  font-size: 2rem;
+  border-radius: 0.6rem;
+  padding: 10px 10px;
+  margin-top: 1rem;
+  font-weight: bold;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.registrarColaborador:hover {
+  background-color: #5ed84c;
+}
+
+@media (max-width: 768px) {
+  .sectionRegisterContainer {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .styled-table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    background-color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.1rem;
+  }
+  .registrarColaborador {
+    width: 100%;
+  }
+}
