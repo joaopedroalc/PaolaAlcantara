@@ -17,7 +17,7 @@ const View = () => {
   const { id } = currentId;
   const history = useHistory();
   useEffect(() => {
-    firebaseDb.child("colaboradores").on("value", (snapshot) => {
+    firebaseDb.child("clientes").on("value", (snapshot) => {
       if (snapshot.val() !== null) {
         setData({
           ...snapshot.val(),
@@ -67,7 +67,7 @@ const View = () => {
                       ref={pdfExportComponentAcao}
                       paperSize='auto'
                       margin={40}
-                      fileName={`Consulta do Cliente ${data[id].name} - ${data[id].dataConsulta}`}
+                      fileName={`Consulta do Cliente ${data[id].nomeCliente} - ${data[id].dataConsulta}`}
                       author='joaopedrocode'
                     >
                       <div className='container-items'>
@@ -83,7 +83,7 @@ const View = () => {
                           <h2>Dados pessoais</h2>
                           <div>
                             <h3>Nome</h3>
-                            <p>{data[id].name}</p>
+                            <p>{data[id].nomeCliente}</p>
                           </div>
                           <div>
                             <h3>Telefone</h3>

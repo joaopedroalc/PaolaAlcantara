@@ -18,14 +18,15 @@ const AddEdit = () => {
   const { infosUser } = useContext(UserContext);
 
   // console.log(infosUser);
+
   const initialState = {
-    name: infosUser.displayName,
-    email: infosUser.email,
+    nomeCliente: "",
   };
+
   const [state, setState] = useState(initialState);
   const [data, setData] = useState({});
   const {
-    name,
+    nomeCliente,
     telefone,
     opcaoServicos,
     procedimento,
@@ -44,7 +45,7 @@ const AddEdit = () => {
 
   const { id } = useParams();
   useEffect(() => {
-    firebaseDb.child("colaboradores").on("value", (snapshot) => {
+    firebaseDb.child("clientes").on("value", (snapshot) => {
       if (snapshot.val() !== null) {
         setData({
           ...snapshot.val(),
@@ -115,24 +116,24 @@ const AddEdit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name) {
+    if (!nomeCliente) {
       toast.error("Forneça um valor no campo nome");
     } else {
       if (!id) {
         // No id mean user is adding record for the first time
-        firebaseDb.child("colaboradores").push(state, (err) => {
+        firebaseDb.child("clientes").push(state, (err) => {
           if (err) {
             toast.error(err);
           } else {
-            toast.success("Colaborador adicionado com sucesso");
+            toast.success("Cliente adicionado com sucesso");
           }
         });
       } else {
-        firebaseDb.child(`/colaboradores/${id}`).set(state, (err) => {
+        firebaseDb.child(`/clientes/${id}`).set(state, (err) => {
           if (err) {
             toast.error(err);
           } else {
-            toast.success("Colaborador atualizado com sucesso");
+            toast.success("Cliente atualizado com sucesso");
           }
         });
       }
@@ -168,12 +169,13 @@ const AddEdit = () => {
         <section className='containerForms'>
           <div className='infosObraForm'>
             <h2>Cadastrar informações</h2>
-            <label htmlFor='name'>Nome do Cliente</label>
+            <label htmlFor='nomeCliente'>Nome do Cliente</label>
             <input
               type='text'
-              id='name'
-              name='name'
-              value={name}
+              required
+              id='nomeCliente'
+              name='nomeCliente'
+              value={nomeCliente}
               onChange={handleInputChange}
             />
 
@@ -241,7 +243,6 @@ const AddEdit = () => {
               id='imagemAntes'
               name='imagemAntes'
               onChange={handleCaptureValueImage}
-              style={{ paddingBottom: "2rem" }}
             />
             {imagemAntes && <img src={imagemAntes} className='imagemPreview' />}
             <br />
@@ -251,7 +252,6 @@ const AddEdit = () => {
               id='imagemDepois'
               name='imagemDepois'
               onChange={handleCaptureValueImage}
-              style={{ paddingBottom: "2rem" }}
             />
             {imagemDepois && (
               <img src={imagemDepois} className='imagemPreview' />

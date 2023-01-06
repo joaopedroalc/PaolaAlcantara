@@ -20,7 +20,7 @@ const Home = () => {
   const { infosUser } = useContext(UserContext);
 
   useEffect(() => {
-    firebaseDb.child("colaboradores").on("value", (snapshot) => {
+    firebaseDb.child("clientes").on("value", (snapshot) => {
       if (snapshot.val() !== null) {
         setData({
           ...snapshot.val(),
@@ -37,7 +37,7 @@ const Home = () => {
 
   const onDelete = (id) => {
     if (window.confirm("Tem certeza que deseja excluir ?")) {
-      firebaseDb.child(`colaboradores/${id}`).remove((err) => {
+      firebaseDb.child(`clientes/${id}`).remove((err) => {
         if (err) {
           console.log(err);
         } else {
@@ -74,7 +74,9 @@ const Home = () => {
               if (searchTerm == "") {
                 return data[id];
               } else if (
-                data[id].name.toLowerCase().includes(searchTerm.toLowerCase())
+                data[id].nomeCliente
+                  .toLowerCase()
+                  .includes(searchTerm.toLowerCase())
               ) {
                 return data[id];
               } else if (
@@ -89,7 +91,7 @@ const Home = () => {
               return (
                 <tr key={id}>
                   <td>
-                    {data[id].name} |{" "}
+                    {data[id].nomeCliente} |{" "}
                     {data[id].dataConsulta.toString().slice(8, 10)}
                     {"/"}
                     {data[id].dataConsulta.toString().slice(5, 7)}
@@ -124,19 +126,18 @@ const Home = () => {
                     </div>
 
                     <td className='buttonsAction'>
-                      {infosUser.email === data[id].email && (
-                        <>
-                          <Link to={`/update/${id}`}>
-                            <button className='btn btn-edit'>Editar</button>
-                          </Link>
-                          <button
-                            className='btn btn-delete'
-                            onClick={() => onDelete(id)}
-                          >
-                            Deletar
-                          </button>
-                        </>
-                      )}
+                      <>
+                        <Link to={`/update/${id}`}>
+                          <button className='btn btn-edit'>Editar</button>
+                        </Link>
+                        <button
+                          className='btn btn-delete'
+                          onClick={() => onDelete(id)}
+                        >
+                          Deletar
+                        </button>
+                      </>
+
                       <Link to={`/view/${id}`}>
                         <button className='btn btn-view'>
                           Visualizar tudo
