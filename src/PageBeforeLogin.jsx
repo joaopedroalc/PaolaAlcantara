@@ -35,7 +35,7 @@ export function PageBeforeLogin() {
     if (user) {
       if (
         user.email === "joaopedro.ufma@gmail.com" ||
-        user.email === "drive.opens@gmail.com"
+        user.email === "paollaalcantara2016@gmail.com"
       ) {
         setUser(true);
         setInfosUser(user);
