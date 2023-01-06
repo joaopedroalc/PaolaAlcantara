@@ -5,8 +5,6 @@ import App from "./App";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import ShowChartIcon from "@mui/icons-material/ShowChart";
-
 import paola from "./assets/paola.png";
 
 import Button from "@mui/material/Button";
@@ -23,8 +21,6 @@ export function PageBeforeLogin() {
       .then((result) => {
         var user = result.user;
         // console.log(user.email);
-
-        setUser(true);
         setInfosUser(user);
       })
       .catch((error) => {
@@ -49,7 +45,7 @@ export function PageBeforeLogin() {
 
   return (
     <div>
-      {user ? (
+      {user === true ? (
         <App setUser={setUser} infosUser={infosUser} />
       ) : (
         <div className={styles.home}>
