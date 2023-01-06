@@ -107,7 +107,15 @@ const View = () => {
                             <div>
                               <div>
                                 <h3>Data da consulta</h3>
-                                <p>{data[id].dataConsulta}</p>
+                                <p>
+                                  {data[id].dataConsulta
+                                    .toString()
+                                    .slice(8, 10)}
+                                  {"/"}
+                                  {data[id].dataConsulta.toString().slice(5, 7)}
+                                  {"/"}
+                                  {data[id].dataConsulta.toString().slice(0, 4)}
+                                </p>
                               </div>
                             </div>
                             <div>

@@ -9,7 +9,8 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import MaskedInput from "./MaskedInput";
+
+import InputMask from "react-input-mask";
 
 import { UserContext } from "../../context/UserContext";
 
@@ -177,14 +178,17 @@ const AddEdit = () => {
             />
 
             <label htmlFor='telefone'>Telefone</label>
-            <input
-              type='text'
+
+            <InputMask
               id='telefone'
               name='telefone'
               required
+              mask='99 99999-9999'
               value={telefone}
               onChange={handleInputChange}
             />
+
+            {/* <input type='text' value={telefone} onChange={handleInputChange} /> */}
 
             {/* <label htmlFor='opcaoServicos'>Opção de Serviços</label>
             <select
@@ -350,14 +354,15 @@ const AddEdit = () => {
             <div className='containerInfosConsulta'>
               <div>
                 <label htmlFor='dataConsulta'>Data da consulta</label>
+
                 <input
                   type='date'
+                  pattern='[0-9]{2}-[0-9]{2}-[0-9]{4}'
                   id='dataConsulta'
-                  name='dataConsulta'
-                  pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}'
                   required
                   value={dataConsulta}
                   onChange={handleInputChange}
+                  name='dataConsulta'
                 />
               </div>
 

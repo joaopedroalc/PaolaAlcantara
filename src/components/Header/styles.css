@@ -77,6 +77,10 @@
 }
 
 @media (max-width: 480px) {
+
+  .header{
+    justify-content:center;
+  }
   .header p {
     float: none;
     display: block;
