@@ -60,12 +60,9 @@ const AddEdit = () => {
   const {
     nomeCliente,
     telefone,
-    opcaoServicos,
     procedimento,
     dataConsulta,
     horaInicio,
-    dataIntervalo,
-    horaIntervalo,
     horaFim,
     statusExecucao,
     situacaoCliente,
@@ -247,43 +244,6 @@ const AddEdit = () => {
               onChange={handleInputChange}
             />
 
-            {/* <input type='text' value={telefone} onChange={handleInputChange} /> */}
-
-            {/* <label htmlFor='opcaoServicos'>Opção de Serviços</label>
-            <select
-              name='opcaoServicos'
-              id='opcaoServicos'
-              value={opcaoServicos}
-              onChange={handleInputChange}
-            >
-              <option value=''>Nenhum</option>
-              <option value='Vistoria de danos elétricos'>
-                Vistoria de danos elétricos
-              </option>
-              <option value='Vistoria técnica PV/ST'>
-                Vistoria técnica PV/ST
-              </option>
-              <option value='Inspeção'>Inspeção</option>
-              <option value='Vistoria de nível de tensão'>
-                Vistoria de nível de tensão
-              </option>
-              <option value='Coleta de amostral'>Coleta de amostral</option>
-              <option value='Atendimento emergencial'>
-                Atendimento emergencial
-              </option>
-              <option value='Acompanhar Obras/Desligamento'>
-                Acompanhar Obras/Desligamento
-              </option>
-              <option value='Manut/Obra Subestação'>
-                Manut/Obra Subestação
-              </option>
-              <option value='Atividade rotina'>Atividade rotina</option>
-              <option value='RS1 - Religamento'>RS1 - Religamento</option>
-              <option value='Plano Manutenção'>Plano Manutenção</option>
-              <option value='Reincidente'>Reincidente</option>
-              <option value='Demanda Extra'>Demanda Extra</option>
-            </select> */}
-
             <label htmlFor='procedimento'>Procedimento realizado</label>
             <input
               type='text'
@@ -451,7 +411,6 @@ const AddEdit = () => {
 
                 <input
                   type='date'
-                  pattern='[0-9]{2}-[0-9]{2}-[0-9]{4}'
                   id='dataConsulta'
                   required
                   value={dataConsulta}
@@ -466,39 +425,10 @@ const AddEdit = () => {
                   type='time'
                   id='horaInicio'
                   name='horaInicio'
-                  pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}'
                   value={horaInicio || ""}
                   onChange={handleInputChange}
                 />
               </div>
-
-              {opcaoServicos === "Inspeção" && (
-                <>
-                  <div>
-                    <label htmlFor='dataIntervalo'>Data de Intervalo</label>
-                    <input
-                      type='date'
-                      id='dataIntervalo'
-                      name='dataIntervalo'
-                      pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}'
-                      value={dataIntervalo || ""}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor='horaIntervalo'>Horário de Intervalo</label>
-                    <input
-                      type='time'
-                      id='horaIntervalo'
-                      name='horaIntervalo'
-                      pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}'
-                      value={horaIntervalo || ""}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </>
-              )}
 
               <div>
                 <label htmlFor='horaFim'>Horário de Término</label>
@@ -506,7 +436,6 @@ const AddEdit = () => {
                   type='time'
                   id='horaFim'
                   name='horaFim'
-                  pattern='[0-9]{4}-[0-9]{2}-[0-9]{2}'
                   value={horaFim || ""}
                   onChange={handleInputChange}
                 />

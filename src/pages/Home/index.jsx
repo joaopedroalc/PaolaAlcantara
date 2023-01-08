@@ -81,6 +81,9 @@ const Home = () => {
                 return data[id];
               } else if (
                 data[id].dataConsulta
+                  .split("-")
+                  .reverse()
+                  .join("/")
                   .toLowerCase()
                   .includes(searchTerm.toLowerCase())
               ) {
@@ -92,11 +95,7 @@ const Home = () => {
                 <tr key={id}>
                   <td>
                     {data[id].nomeCliente} |{" "}
-                    {data[id].dataConsulta.toString().slice(8, 10)}
-                    {"/"}
-                    {data[id].dataConsulta.toString().slice(5, 7)}
-                    {"/"}
-                    {data[id].dataConsulta.toString().slice(0, 4)}
+                    {data[id].dataConsulta.split("-").reverse().join("/")}
                   </td>
 
                   <div style={{ display: "flex", alignItems: "center" }}>
