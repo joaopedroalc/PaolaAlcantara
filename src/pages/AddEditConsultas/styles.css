@@ -1,0 +1,136 @@
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+}
+
+label{
+  color: #fff;
+}
+
+.label-dialog{
+  color: #000;
+  font-size: 1.2rem;
+}
+
+legend {
+  color: #000;
+}
+
+fieldset div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input-fieldset {
+  width: auto;
+  padding: 0px;
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.add-edit__form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="submit"] {
+  width: 80vw;
+  background-color: #2196f3;
+  color: #fff;
+  padding: 14px 20px;
+  margin: 1rem auto;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 1s;
+}
+
+input[type="submit"]:hover {
+  background-color: green;
+  border: 1px solid #fff;
+}
+
+.add-edit {
+  margin-top: 2rem;
+}
+
+.containerForms {
+  width: 80vw;
+  margin: 0 auto;
+  display: flex;
+  gap: 2rem;
+}
+.containerForms h2 {
+  color: #bbb;
+  font-size: 2rem;
+  text-align: left;
+}
+
+.infosObraForm,
+.situacaoObraForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.imagemPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.containerInfosConsulta{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%
+}
+
+@media (max-width: 768px) {
+  .containerForms {
+    width: 90vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .containerInfosConsulta{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 100%
+  }
+
+  .containerInfosConsulta input{
+    width: 90vw;
+  }
+  input[type="file"] {
+    padding-bottom: 1rem !important;
+  }
+  input[type="submit"] {
+    width: 90vw;
+    background-color: #2196f3;
+    color: #fff;
+    padding: 14px 20px;
+    margin: 1rem auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 1s;
+  }
+}

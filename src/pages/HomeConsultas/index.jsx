@@ -1,26 +1,29 @@
 import React, { useState, useEffect, useContext } from "react";
 import firebaseDb from "../../config/firebase.js";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./styles.css";
 import { toast } from "react-toastify";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../context/UserContext.js";
 
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom";
 import PendingActionsIcon from "@mui/icons-material/PendingActions";
-import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
-
-import WatchLaterIcon from "@mui/icons-material/WatchLater";
 
 import Tooltip from "@mui/material/Tooltip";
 
-const Home = () => {
+const HomeConsultas = () => {
   const [data, setData] = useState({});
 
   const { infosUser } = useContext(UserContext);
 
+  let currentId = useParams();
+  const { id } = currentId;
+
+  let currentIdConsultas = useParams();
+  const { idconsultas } = currentIdConsultas;
+
   useEffect(() => {
-    firebaseDb.child("clientes").on("value", (snapshot) => {
+    firebaseDb.child(`/clientes/${id}/consultas`).on("value", (snapshot) => {
       if (snapshot.val() !== null) {
         setData({
           ...snapshot.val(),
@@ -35,32 +38,36 @@ const Home = () => {
     };
   }, []);
 
-  const onDelete = (id) => {
+  const onDelete = (idconsultas) => {
     if (window.confirm("Tem certeza que deseja excluir ?")) {
-      firebaseDb.child(`clientes/${id}`).remove((err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          toast.success("Colaborador deletado com sucesso");
-        }
-      });
+      firebaseDb
+        .child(`/clientes/${id}/consultas/${idconsultas}`)
+        .remove((err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            toast.success("Consulta deletada com sucesso");
+          }
+        });
     }
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+
+  console.log(data);
 
   return (
     <div className='home'>
       <div className='sectionRegisterContainer'>
         <div className='sectionRegister'>
           <h2>Gerenciamento de clientes</h2>
-          <Link to={`/add`}>
-            <button className='registrarColaborador'>Cadastrar cliente</button>
+          <Link to={`/consultas/${id}`}>
+            <button className='registrarColaborador'>Agendar consulta</button>
           </Link>
         </div>
         <input
           type='search'
-          placeholder='Buscar por Cliente '
+          placeholder='Buscar por Data da Consulta'
           onChange={(event) => {
             setSearchTerm(event.target.value);
           }}
@@ -74,7 +81,10 @@ const Home = () => {
               if (searchTerm == "") {
                 return data[id];
               } else if (
-                data[id].nomeCliente
+                data[id].dataConsulta
+                  .split("-")
+                  .reverse()
+                  .join("/")
                   .toLowerCase()
                   .includes(searchTerm.toLowerCase())
               ) {
@@ -85,15 +95,8 @@ const Home = () => {
               return (
                 <tr key={id}>
                   <td>
-                    {data[id].nomeCliente}{" "}
-                    <Link to={`/consultas/${id}`}>
-                      <button className='btn btn-edit'>
-                        Adicionar consulta
-                      </button>
-                    </Link>
-                    <Link to={`/homeconsultas/${id}`}>
-                      <button className='btn btn-view'>Ver consultas</button>
-                    </Link>
+                    {data[id].dataConsulta}
+                    {" | "} {data[id].procedimento}
                   </td>
 
                   <div style={{ display: "flex", alignItems: "center" }}>
@@ -124,7 +127,7 @@ const Home = () => {
 
                     <td className='buttonsAction'>
                       <>
-                        <Link to={`/update/${id}`}>
+                        <Link to={`/updateconsultas/${id}`}>
                           <button className='btn btn-edit'>Editar</button>
                         </Link>
 
@@ -136,7 +139,7 @@ const Home = () => {
                         </button>
                       </>
 
-                      <Link to={`/view/${id}`}>
+                      <Link to={`/viewconsultas/${id}`}>
                         <button className='btn btn-view'>
                           Visualizar tudo
                         </button>
@@ -152,4 +155,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeConsultas;

@@ -50,6 +50,8 @@ const View = () => {
     }
   };
 
+  console.log(data);
+
   return (
     <div className='container mt-5'>
       {Object.keys(data).map((userId) => {
@@ -59,9 +61,9 @@ const View = () => {
               <div className='col-2'>
                 <div className='card'>
                   <div className='card-header'>
-                    <h2>Detalhes da consulta</h2>
+                    <h2>Dados pessoais</h2>
                   </div>
-
+                  {console.log(data[id])}
                   <div className='container-colaborador'>
                     <PDFExport
                       ref={pdfExportComponentAcao}
@@ -80,7 +82,6 @@ const View = () => {
                     })
                   } */}
                         <div className='dadosPessoais'>
-                          <h2>Dados pessoais</h2>
                           <div>
                             <h3>Nome</h3>
                             <p>{data[id].nomeCliente}</p>
@@ -88,97 +89,6 @@ const View = () => {
                           <div>
                             <h3>Telefone</h3>
                             <p>{data[id].telefone}</p>
-                          </div>
-                        </div>
-                        <div className='dadosConsulta'>
-                          <h2>Dados da consulta</h2>
-                          <div className='colThree'>
-                            <div>
-                              <div>
-                                <h3>Procedimento realizado </h3>
-                                <p>{data[id].procedimento}</p>
-
-                                <div>
-                                  <h3>Status de Execução</h3>
-                                  <p>{data[id].statusExecucao}</p>
-                                </div>
-                              </div>
-                            </div>
-                            <div>
-                              <div>
-                                <h3>Data da consulta</h3>
-                                <p>
-                                  {data[id].dataConsulta
-                                    .split("-")
-                                    .reverse()
-                                    .join("/")}
-                                </p>
-                              </div>
-                            </div>
-                            <div>
-                              <div>
-                                <h3>Horário de Início</h3>
-                                <p>{data[id].horaInicio}</p>
-                                <h3>Horário de Término</h3>
-                                <p>{data[id].horaFim}</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <br />
-
-                          <div>
-                            <h3>Situação do Cliente</h3>
-                            <p>{data[id].situacaoCliente}</p>
-                          </div>
-                          <br />
-                          <div className='imagensContainer'>
-                            <div>
-                              <h3>Imagem antes do Serviço</h3>
-                              <br />
-                              <img
-                                src={data[id].imagemAntes}
-                                className='imagemView'
-                              />
-                            </div>
-
-                            <div>
-                              <h3>Imagem depois do Serviço</h3>
-                              <br />
-                              <img
-                                src={data[id].imagemDepois}
-                                className='imagemView'
-                              />
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className='dadosConsulta'>
-                          <h2>Histórico Patológico</h2>
-
-                          <div>
-                            <h3>Alergia</h3>
-                            <p>
-                              {data[id].alergia === "Sim"
-                                ? data[id].tipoAlergia
-                                : "Não"}
-                            </p>
-                          </div>
-
-                          <div>
-                            <h3>Tratamento médico</h3>
-                            <p>
-                              {data[id].medicacao === "Sim"
-                                ? data[id].tipoMedicamento
-                                : "Não"}
-                            </p>
-                          </div>
-
-                          <div>
-                            <h3>Comorbidades</h3>
-                            {data[id].comorbidades?.map((doenca) => {
-                              return <p>{doenca}</p>;
-                            })}
                           </div>
                         </div>
                       </div>
@@ -189,7 +99,7 @@ const View = () => {
                       className='button-download'
                       variant='contained'
                     >
-                      Imprimir dados da consulta
+                      Imprimir dados pessoais
                       <PrintIcon />
                     </Button>
                   </div>

@@ -1,0 +1,122 @@
+.col-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+}
+
+.card {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  background-color: #f3f3f3;
+}
+
+.card-header {
+  width: 100%;
+  background-color: green;
+  color: #f3f3f3;
+  text-align: left;
+}
+
+.card-header h2 {
+  font-size: 1.6rem;
+  padding-left: 1rem;
+}
+
+.container-items {
+  margin-top: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.container-colaborador {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-colaborador .button-download {
+  width: max-content;
+  height: 3rem;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.dadosConsulta,
+.dadosPessoais {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.dadosPessoais h2,
+.dadosConsulta h2 {
+  color: #bbb;
+}
+
+.dadosConsulta p,
+.dadosPessoais p {
+  word-wrap: break-word;
+  text-align: justify;
+  margin: 8px 0;
+}
+
+.dadosConsulta h3,
+.dadosPessoais h3 {
+  margin: 0;
+}
+
+.colThree {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  gap: 2rem;
+}
+
+.logoOpen {
+  width: 5rem;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.imagemView {
+  width: 100%;
+  object-fit: cover;
+}
+
+.imagensContainer {
+  display: flex;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+  }
+  .imagensContainer {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .colThree {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0rem;
+  }
+}
